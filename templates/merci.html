@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Merci
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 ps-md-5">
+
+      <!-- note, the id is not used in the template -->
+
+      <h1 class="pt-5 pb-2">Merci</h1>
+
+      <p><a href="{{ url_for('index') }}">Return to feedback form</a></p>
+
+	  <!--
+	      notice how the URL in the link above is rendered for
+	      Flask - it needs to name the FUNCTION, not the route
+      -->
+
+  	  <p>Merci pour votre rétroaction.</p>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

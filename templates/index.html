@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block title %}
+Feedback for {{ target }}
+{% endblock %}
+
+
+{% block content %}
+
+<!--
+	TIPS about using Bootstrap-Flask:
+	https://github.com/helloflask/bootstrap-flask
+	https://bootstrap-flask.readthedocs.io/
+-->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+
+      <h1 class="pt-5 pb-2">Please submit your feedback for {{ target }}</h1>
+
+      <p class="lead">This is a form where you can submit feedback for me.</p>
+
+      {{ render_form(form) }}
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
