@@ -19,6 +19,8 @@ app.secret_key = foo
 bootstrap = Bootstrap5(app)
 # Flask-WTF requires this line
 csrf = CSRFProtect(app)
+csrf.init_app(app)
+
 
 class NameForm(FlaskForm):
     name = StringField(f"Please submit your feedback for {target_name}", validators=[DataRequired(), Length(10, 40)])
