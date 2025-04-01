@@ -23,7 +23,8 @@ csrf.init_app(app)
 
 
 class NameForm(FlaskForm):
-    name = StringField(f"The text you submit via this will be encrypted, and can be decrypted only by {target_name}", validators=[DataRequired(), Length(10, 40)])
+    name = StringField(f"The text you submit via this form will be encrypted, and can be decrypted only by {target_name}",
+                       validators=[DataRequired(), Length(10, 1000)])
     submit = SubmitField('Submit')
 
 @app.route('/', methods=['GET', 'POST'])
