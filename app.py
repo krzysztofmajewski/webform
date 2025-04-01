@@ -19,13 +19,12 @@ app.secret_key = foo
 # Bootstrap-Flask requires this line
 bootstrap = Bootstrap5(app)
 # Flask-WTF requires this line
-csrf = CSRFProtect(app)
-csrf.init_app(app)
+# csrf = CSRFProtect(app)
+# csrf.init_app(app)
 
 
 class NameForm(FlaskForm):
     label = f"The text you submit via this form will be encrypted, and can be decrypted only by {target_name}"
-    # name = StringField(label, validators=[DataRequired(), Length(10, 1000)])
     name = TextAreaField(label, validators=[DataRequired(), Length(10, 200)])
 
     submit = SubmitField('Submit')
