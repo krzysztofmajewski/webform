@@ -5,6 +5,7 @@ from flask_bootstrap import Bootstrap5
 
 from flask_wtf import FlaskForm, CSRFProtect
 from wtforms import StringField, SubmitField
+from wtforms.fields.simple import TextAreaField
 from wtforms.validators import DataRequired, Length
 
 
@@ -23,8 +24,10 @@ csrf.init_app(app)
 
 
 class NameForm(FlaskForm):
-    name = StringField(f"The text you submit via this form will be encrypted, and can be decrypted only by {target_name}",
-                       validators=[DataRequired(), Length(10, 1000)])
+    label = f"The text you submit via this form will be encrypted, and can be decrypted only by {target_name}"
+    # name = StringField(label, validators=[DataRequired(), Length(10, 1000)])
+    name = TextAreaField(label, validators=[DataRequired(), Length(10, 200)])
+
     submit = SubmitField('Submit')
 
 @app.route('/', methods=['GET', 'POST'])
