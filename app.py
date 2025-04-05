@@ -2,12 +2,10 @@ import secrets
 
 from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap5
-from flask_wtf import FlaskForm, CSRFProtect
-from wtforms import StringField, SubmitField
+from flask_wtf import FlaskForm
+from wtforms import SubmitField
 from wtforms.fields.simple import TextAreaField
 from wtforms.validators import DataRequired, Length
-from werkzeug.middleware.proxy_fix import ProxyFix
-
 
 target_name = "Krzysztof"
 
@@ -16,18 +14,12 @@ app = Flask(__name__)
 foo = secrets.token_urlsafe(16)
 app.secret_key = foo
 
-# Bootstrap-Flask requires this line
 bootstrap = Bootstrap5(app)
-# Flask-WTF requires this line
-# csrf = CSRFProtect(app)
-# csrf.init_app(app)
-
-# app = ProxyFix(
-#     app, x_for=1, x_proto=1, x_host=1, x_prefix=1
-# )
-
 
 class NameForm(FlaskForm):
+    class Meta:
+        # This overrides the value from the base form.
+        csrf = False
     label = f"The text you submit via this form will be visible only to {target_name}"
     name = TextAreaField(label, validators=[DataRequired(), Length(10, 200)])
 
