@@ -1,14 +1,17 @@
 import secrets
-
+import logging
+from pathlib import Path
 from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
 from wtforms import SubmitField
 from wtforms.fields.simple import TextAreaField
 from wtforms.validators import DataRequired, Length
+from from_root import from_root
 
 target_name = "Krzysztof"
 
+logger = logging.getLogger(__name__)
 app = Flask(__name__)
 
 foo = secrets.token_urlsafe(16)
@@ -33,7 +36,11 @@ def index():
     if form.validate_on_submit():
         feedback: str = form.name.data
         # TODO: Encrypt the feedback with a key that is not accessible to hosting admins
-        # TODO: Push feedback to db table or flat file or blob storage
+        uuid: str = secrets.token_urlsafe(16)
+        filename: Path = from_root(f"./{uuid}.txt")
+        logger.info(f"Wrote feedback of length {len(feedback)} to filename: {filename}")
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(feedback)
         return redirect(url_for('merci', id=id))
 
     return render_template('index.html', form=form, target=target_name)
