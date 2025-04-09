@@ -37,7 +37,7 @@ def index():
         feedback: str = form.name.data
         # TODO: Encrypt the feedback with a key that is not accessible to hosting admins
         uuid: str = secrets.token_urlsafe(16)
-        filename: Path = from_root(f"./{uuid}.txt")
+        filename: Path = from_root(f"./data/{uuid}.txt")
         logger.info(f"Wrote feedback of length {len(feedback)} to filename: {filename}")
         with open(filename, "w", encoding="utf-8") as f:
             f.write(feedback)
